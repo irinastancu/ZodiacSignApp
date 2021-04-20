@@ -1,0 +1,81 @@
+syntax = "proto3"; /* default is proto2 */
+
+/* *
+ * If no explicit java_package option is given in the .proto file, then by default the proto package
+ * (specified using the “package” keyword) will be used
+ * */
+option java_package = "proto";
+
+service Gate {
+
+  rpc getZodiacSign (InfoRequest) returns (InfoReply) {}
+
+}
+
+message InfoRequest {
+
+  string name=1;
+  string date=2;
+}
+
+/* The response message containing the greetings */
+message InfoReply {
+  string message=1;
+}
+
+
+service WinterZodiacSign {
+
+  rpc getWinterSign (WinterZodiacSignRequest) returns (WinterZodiacSignReply) {}
+}
+
+message WinterZodiacSignRequest {
+  string date=2;
+}
+
+/* The response message containing the greetings */
+message WinterZodiacSignReply {
+  string message=1;
+}
+
+service SpringZodiacSign {
+
+  rpc getSpringSign (SpringZodiacSignRequest) returns (SpringZodiacSignReply) {}
+}
+
+message SpringZodiacSignRequest {
+  string date=2;
+}
+
+/* The response message containing the greetings */
+message SpringZodiacSignReply {
+  string message=1;
+}
+
+service SummerZodiacSign {
+
+  rpc getSummerSign (SummerZodiacSignRequest) returns (SummerZodiacSignReply) {}
+}
+
+message SummerZodiacSignRequest {
+  string date=2;
+}
+
+/* The response message containing the greetings */
+message SummerZodiacSignReply {
+  string message=1;
+}
+
+service FallZodiacSign {
+
+  rpc getFallSign (FallZodiacSignRequest) returns (FallZodiacSignReply) {}
+}
+
+message FallZodiacSignRequest {
+  string date=2;
+}
+
+/* The response message containing the greetings */
+message FallZodiacSignReply {
+  string message=1;
+}
