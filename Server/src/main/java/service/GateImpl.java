@@ -83,12 +83,13 @@ public class GateImpl extends GateGrpc.GateImplBase {
                 ManagedChannel channelWinter = ManagedChannelBuilder.forAddress("localhost", 8997).usePlaintext().build();
                 WinterZodiacSignGrpc.WinterZodiacSignBlockingStub winterStub = WinterZodiacSignGrpc.newBlockingStub(channelWinter);
 
-                Zodiac.WinterZodiacSignReply reply = winterStub.getWinterSign(Zodiac.WinterZodiacSignRequest.newBuilder().
+                Zodiac.WinterZodiacSignReply reply = winterStub.getWinterSign(Zodiac.ZodiacRequest.newBuilder().
                         setDate(request.getDate()).build());
 
                 zodiacSign = reply.getMessage();
                 System.out.println(reply.getMessage());
 
+                break;
             }
 
             case "spring":{
@@ -96,11 +97,13 @@ public class GateImpl extends GateGrpc.GateImplBase {
                 ManagedChannel channelSpring = ManagedChannelBuilder.forAddress("localhost", 8996).usePlaintext().build();
                 SpringZodiacSignGrpc.SpringZodiacSignBlockingStub springStub = SpringZodiacSignGrpc.newBlockingStub(channelSpring);
 
-                Zodiac.SpringZodiacSignReply reply = springStub.getSpringSign(Zodiac.SpringZodiacSignRequest.newBuilder().
+                Zodiac.SpringZodiacSignReply reply = springStub.getSpringSign(Zodiac.ZodiacRequest.newBuilder().
                         setDate(request.getDate()).build());
 
                 zodiacSign = reply.getMessage();
                 System.out.println(reply.getMessage());
+
+                break;
             }
 
             case "summer":{
@@ -108,11 +111,13 @@ public class GateImpl extends GateGrpc.GateImplBase {
                 ManagedChannel channelSummer = ManagedChannelBuilder.forAddress("localhost", 8995).usePlaintext().build();
                 SummerZodiacSignGrpc.SummerZodiacSignBlockingStub summerStub = SummerZodiacSignGrpc.newBlockingStub(channelSummer);
 
-                Zodiac.SummerZodiacSignReply reply = summerStub.getSummerSign(Zodiac.SummerZodiacSignRequest.newBuilder().
+                Zodiac.SummerZodiacSignReply reply = summerStub.getSummerSign(Zodiac.ZodiacRequest.newBuilder().
                         setDate(request.getDate()).build());
 
                 zodiacSign = reply.getMessage();
                 System.out.println(reply.getMessage());
+
+                break;
             }
 
             case "fall":{
@@ -120,19 +125,20 @@ public class GateImpl extends GateGrpc.GateImplBase {
                 ManagedChannel channelFall = ManagedChannelBuilder.forAddress("localhost", 8994).usePlaintext().build();
                 FallZodiacSignGrpc.FallZodiacSignBlockingStub fallStub = FallZodiacSignGrpc.newBlockingStub(channelFall);
 
-                Zodiac.FallZodiacSignReply reply = fallStub.getFallSign(Zodiac.FallZodiacSignRequest.newBuilder().
+                Zodiac.FallZodiacSignReply reply = fallStub.getFallSign(Zodiac.ZodiacRequest.newBuilder().
                         setDate(request.getDate()).build());
 
                 zodiacSign = reply.getMessage();
                 System.out.println(reply.getMessage());
+
+                break;
             }
         }
 
-
-        Zodiac.InfoReply reply = Zodiac.InfoReply.newBuilder().setMessage("Hello " + request.getName()
+        Zodiac.InfoReply gateReply = Zodiac.InfoReply.newBuilder().setMessage("Hello " + request.getName()
                 + " your zodiac sign is "+ zodiacSign + '\n').build();
-        /* We can call multiple times onNext function if we have multiple replies, ex. in next commits */
-        responseObserver.onNext(reply);
+
+        responseObserver.onNext(gateReply);
         responseObserver.onCompleted();
 
     }

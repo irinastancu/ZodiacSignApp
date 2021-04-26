@@ -114,7 +114,7 @@ public class WinterImpl extends WinterZodiacSignGrpc.WinterZodiacSignImplBase {
 
     @Override
 
-    public void getWinterSign(Zodiac.WinterZodiacSignRequest request, StreamObserver<Zodiac.WinterZodiacSignReply> responseObserver) {
+    public void getWinterSign(Zodiac.ZodiacRequest request, StreamObserver<Zodiac.WinterZodiacSignReply> responseObserver) {
 
         String birthdate = request.getDate();
 
@@ -126,11 +126,9 @@ public class WinterImpl extends WinterZodiacSignGrpc.WinterZodiacSignImplBase {
         }
 
         Zodiac.WinterZodiacSignReply reply = Zodiac.WinterZodiacSignReply.newBuilder().setMessage(zodiacSign).build();
-        /* We can call multiple times onNext function if we have multiple replies, ex. in next commits */
-
-        //GateOuterClass.InfoReply currentReply = GateOuterClass.InfoReply.newBuilder().setMessage((reply.getMessage())).build();
 
         System.out.println(reply.getMessage());
+
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
 

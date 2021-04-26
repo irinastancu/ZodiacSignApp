@@ -5,7 +5,6 @@ import io.grpc.stub.StreamObserver;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import proto.FallZodiacSignGrpc;
-import proto.WinterZodiacSignGrpc;
 import proto.Zodiac;
 
 import java.io.BufferedReader;
@@ -117,7 +116,7 @@ public class FallImpl extends FallZodiacSignGrpc.FallZodiacSignImplBase {
 
     @Override
 
-    public void getFallSign(Zodiac.FallZodiacSignRequest request, StreamObserver<Zodiac.FallZodiacSignReply> responseObserver) {
+    public void getFallSign(Zodiac.ZodiacRequest request, StreamObserver<Zodiac.FallZodiacSignReply> responseObserver) {
 
         String birthdate = request.getDate();
 

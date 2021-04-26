@@ -115,7 +115,7 @@ public class SpringImpl extends SpringZodiacSignGrpc.SpringZodiacSignImplBase {
     }
 
     @Override
-    public void getSpringSign(Zodiac.SpringZodiacSignRequest request, StreamObserver<Zodiac.SpringZodiacSignReply> responseObserver) {
+    public void getSpringSign(Zodiac.ZodiacRequest request, StreamObserver<Zodiac.SpringZodiacSignReply> responseObserver) {
 
         String birthdate = request.getDate();
 
